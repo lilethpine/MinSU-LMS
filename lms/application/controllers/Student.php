@@ -110,7 +110,7 @@ class Student extends Controller {
       }
     }
     
-    public function view_act($act_id) 
+    public function view_act($act_id=null) 
     {
       if(!empty($act_id))
       {
@@ -125,7 +125,6 @@ class Student extends Controller {
     public function submit_act()
     {
       
-      $this->call->model('Student_model');
 
       //save activity submission
       if($this->form_validation->submitted())
@@ -154,13 +153,16 @@ class Student extends Controller {
                 $err = $err . ', ' . $error . '<br>';
               } 
               $this->session->set_flashdata(array('alert' => 'danger', 'message' => $err));
-              redirect('student/view_act/');
+              redirect('student/view_act/' . $cou_act_id);
             }
           } 
+
+          $this->call->model('Student_model');
 
           if($this->Student_model->submit_act($cou_act_id, $user_id, $attachments, $date_submitted))
           {
             set_flash_alert('success', 'Submitted!');
+            redirect('student/view_act/' . $cou_act_id);
           }
         } 
         else 
@@ -168,9 +170,10 @@ class Student extends Controller {
           set_flash_alert('danger', $this->form_validation->errors());
         }
         
-        redirect('student/view_act/');
+        redirect('student/view_act/' . $cou_act_id);
 
       }
+
     }
 
 }

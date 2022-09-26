@@ -40,7 +40,7 @@ class Activity_model extends Model
 		return $this->db->table('course_activity')
 						->select('*')
 						->where('cou_act_id', $act_id)
-						->get_all();
+						->get();
 	}
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 20, 2022 at 02:42 AM
+-- Generation Time: Sep 25, 2022 at 11:25 AM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -34,8 +34,17 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `token` varchar(500) NOT NULL,
-  PRIMARY KEY (`admin_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+  `profile` varchar(500) NOT NULL,
+  PRIMARY KEY (`admin_id`),
+  KEY `camp_id` (`camp_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `camp_id`, `email`, `password`, `token`, `profile`) VALUES
+(1, 2, 'ccsadmin@gmail.com', '$2y$04$XupUyzwFgKv21o9tMRPUdu9JSNbbpp.yWAx58oXydEj/qvFxHsx/y', '', '');
 
 -- --------------------------------------------------------
 
@@ -121,7 +130,6 @@ INSERT INTO `course` (`course_id`, `code`, `user_id`, `prog_id`, `course_code`, 
 (4, 'e2MEBs', 1, 1, 'fdsfsd', 'dsad', 3, 'ds', 'dsa', 'dsad', '1', '1', '2022-2023'),
 (5, 'RKfsCP', 1, 1, 'ITP111', 'asdfasfdsa', 3, 'dsfsd', 'F', 'sdfdsfdf', '1', '1', '2022-2023'),
 (11, '5sB3YQ', 1, 1, 'ITP211', 'Embedded', 5, 'adada', 'F1', 'monday111', '1', '1', '2022-2023'),
-(10, '5sB3YQ', 1, 1, 'ITP211', 'Embedded', 5, 'adada', 'F1', 'monday111', '1', '1', '2022-2023'),
 (9, 'HK8sDc', 1, 1, 'iytr', 'zzz', 3, 'vcvc', 'f1', 'saaa', '1', '1', '2022-2023');
 
 -- --------------------------------------------------------
@@ -153,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `course_activity` (
 --
 
 INSERT INTO `course_activity` (`cou_act_id`, `course_id`, `user_id`, `cou_grade_criteria_id`, `cou_batch_grad_id`, `act_title`, `act_desc`, `act_attachments`, `act_status`, `due_date`, `date_posted`, `date_updated`, `cou_topic_id`) VALUES
-(1, 1, 1, NULL, NULL, 'adsads', 'wertyup', '7bd9fd1af6a77ff62158af9d3b4b747aa628e6f0.pdf', '1', '', '2022-09-10 03:28:24 pm', NULL, 1),
+(1, 1, 1, NULL, NULL, 'adsads', 'wertyup', '7bd9fd1af6a77ff62158af9d3b4b747aa628e6f0.pdf', '1', '2022-09-11T13:35', '2022-09-10 03:28:24 pm', NULL, 1),
 (2, 1, 1, NULL, NULL, 'htttr', 'dsfsfsf', 'philhealth-form.pdf', '1', '', '2022-09-10 04:08:51 pm', NULL, 2),
 (3, 1, 1, NULL, NULL, 'kluii', 'khukhu', '256b1d7cc673b5f1e685e27891b707659828b0fa.pdf', '1', '', '2022-09-10 04:13:38 pm', NULL, 3),
 (4, 1, 1, NULL, NULL, 'fdfddd', 'dfrgdr', '12df7da65a6ec59c59ec137bec1ef9d844c59073.pdf', '1', '2022-09-11T13:35', '2022-09-11 05:31:09 am', NULL, 1);
@@ -184,17 +192,24 @@ DROP TABLE IF EXISTS `course_activity_stud_response`;
 CREATE TABLE IF NOT EXISTS `course_activity_stud_response` (
   `cou_act_stud_res_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `stud_cou_group_id` int(11) NOT NULL,
+  `stud_cou_group_id` int(11) DEFAULT NULL,
   `cou_act_id` int(11) NOT NULL,
-  `response_type` varchar(255) NOT NULL,
-  `group_title` varchar(100) NOT NULL,
+  `response_type` varchar(255) DEFAULT NULL,
+  `group_title` varchar(100) DEFAULT NULL,
   `attachments` varchar(100) NOT NULL,
-  `submission_status` varchar(100) NOT NULL,
-  `date_submitted` datetime NOT NULL,
-  `remarks` varchar(255) NOT NULL,
-  `grade` int(11) NOT NULL,
+  `submission_status` varchar(100) NOT NULL DEFAULT '',
+  `date_submitted` varchar(100) NOT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `grade` int(11) DEFAULT NULL,
   PRIMARY KEY (`cou_act_stud_res_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `course_activity_stud_response`
+--
+
+INSERT INTO `course_activity_stud_response` (`cou_act_stud_res_id`, `user_id`, `stud_cou_group_id`, `cou_act_id`, `response_type`, `group_title`, `attachments`, `submission_status`, `date_submitted`, `remarks`, `grade`) VALUES
+(1, 2, NULL, 4, NULL, NULL, '8c5c15d7f757432dba20f34800a3b351b59f536d.pdf', '1', '2022-09-25 08:51:06 am', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -629,9 +644,9 @@ CREATE TABLE IF NOT EXISTS `student_course` (
   `user_id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
   `join_status` varchar(100) NOT NULL,
-  `date_join` datetime NOT NULL,
+  `date_join` varchar(100) NOT NULL,
   PRIMARY KEY (`stud_cou_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `student_course`
@@ -639,7 +654,10 @@ CREATE TABLE IF NOT EXISTS `student_course` (
 
 INSERT INTO `student_course` (`stud_cou_id`, `user_id`, `course_id`, `join_status`, `date_join`) VALUES
 (1, 2, 1, '1', '2022-09-16 16:30:34'),
-(2, 3, 1, '1', '2022-09-17 15:24:47');
+(2, 3, 1, '1', '2022-09-17 15:24:47'),
+(3, 2, 11, '1', '2022-09-23 02:32:25 pm'),
+(4, 2, 5, '1', '2022-09-23 02:33:31 pm'),
+(5, 2, 2, '1', '2022-09-23 02:37:22 pm');
 
 -- --------------------------------------------------------
 
