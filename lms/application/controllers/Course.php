@@ -73,6 +73,59 @@ class Course extends Controller {
       $this->call->view('course/course_list_view', $data);
     }
 
+    public function edit_course()
+    {
+      
+      $this->call->model('Course_model','course');
+
+      //edit course
+      if($this->form_validation->submitted())
+      {
+        $this->form_validation
+          ->name('code')->required()
+          ->name('course_code')->required()
+          ->name('course_description')->required()
+          ->name('units')->required()
+          ->name('room')->required()
+          ->name('section')->required()
+          ->name('schedule')->required()
+          ->name('semester')->required()
+          ->name('academic_year')->required();
+          
+        if($this->form_validation->run())
+        {
+
+          $data['user_id'] = $this->session->userdata('user_id');
+
+          $data['code'] = $this->io->post('code');
+          $data['prog_id'] = $this->io->post('prog_id');
+          $data['course_code'] = $this->io->post('course_code');
+          $data['course_description'] = $this->io->post('course_description');
+          $data['units'] = $this->io->post('units');
+          $data['room'] = $this->io->post('room');
+          $data['section'] = $this->io->post('section');
+          $data['schedule'] = $this->io->post('schedule');
+          $data['semester'] =  $this->io->post('semester');
+          $data['academic_year'] = $this->io->post('academic_year');
+
+          if($this->course->create_course($data))
+          {
+            set_flash_alert('success', 'Course created successfully!');
+          }
+        } 
+        else 
+        {
+          set_flash_alert('danger', $this->form_validation->errors());
+        } 
+      }
+
+      //load courses
+      $data['courses'] = $this->course->get_course();
+
+      $this->call->view('course/course_list_view', $data);
+    }
+
+    //view course
     public function view($course_id)
     {
       if(!empty($course_id)){
@@ -103,6 +156,10 @@ class Course extends Controller {
 
       }
     }
-
+    //delete course
+    public function delete_course()
+    {
+      
+    }
 }
 ?>

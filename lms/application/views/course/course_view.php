@@ -170,7 +170,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                     ?>
                     <br>
                       <?php if($_SESSION['user_type'] == "instructor") { ?>
-                      <h6 class="mb-0"><a href="<?php echo BASE_URL; ?>activity/view_act/<?php echo $activity['cou_act_id']; ?>" title=""><?php echo $activity['act_title']; ?></a><a href="#" title=""><i class="fas fa-edit"></i></a></h6>
+                      <h6 class="mb-0"><a href="<?php echo BASE_URL; ?>activity/view_act/<?php echo $activity['cou_act_id']; ?>" title=""><?php echo $activity['act_title']; ?></a></h6>
                       <?php } ?>
                       <?php if($_SESSION['user_type'] == "student") { ?>
                       <h6 class="mb-0"><a href="<?php echo BASE_URL; ?>student/view_act/<?php echo $activity['cou_act_id']; ?>" title=""><?php echo $activity['act_title']; ?></a></h6>

@@ -9,7 +9,7 @@ defined('PREVENT_DIRECT_ACCESS') or exit('No direct script access allowed');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mentor</title>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
@@ -31,7 +31,7 @@ defined('PREVENT_DIRECT_ACCESS') or exit('No direct script access allowed');
                 <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-10">
                     <a class="d-flex flex-center mb-4" href="../../../index.html">
                         <img class="me-2" src="../../../assets/img/icons/spot-illustrations/falcon.png" alt="" width="58" />
-                        <span class="font-sans-serif fw-bolder fs-5 d-inline-block">lead</span>
+                        <span class="font-sans-serif fw-bolder fs-5 d-inline-block">mentor</span>
                     </a>
                     <div class="row g-3">
                         <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">

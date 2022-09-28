@@ -37,6 +37,7 @@ class Student extends Controller {
       $this->call->view('main_view' , $data);
       
     }
+    
     public function all_courses() 
     {
       $user_id = $_SESSION['user_id'];
@@ -52,7 +53,7 @@ class Student extends Controller {
       
       $this->call->model('Student_model');
 
-      //save material
+      //join course
       if($this->form_validation->submitted())
       {
         $this->form_validation
@@ -78,7 +79,7 @@ class Student extends Controller {
 
       }
     }
-
+    //view course
     public function view($course_id)
     {
       if(!empty($course_id)){
@@ -109,7 +110,7 @@ class Student extends Controller {
 
       }
     }
-    
+    //view activity
     public function view_act($act_id=null) 
     {
       if(!empty($act_id))
@@ -124,8 +125,6 @@ class Student extends Controller {
 
     public function submit_act()
     {
-      
-
       //save activity submission
       if($this->form_validation->submitted())
       {
